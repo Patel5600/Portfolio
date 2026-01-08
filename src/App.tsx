@@ -15,16 +15,23 @@ function App() {
   const setModalContent = useStore((state) => state.setModalContent)
 
   useEffect(() => {
-    const lenis = new Lenis()
+    // Smoother scroll settings
+    const lenis = new Lenis({
+      lerp: 0.1, // Default is 0.1, let's keep it standard or slightly lower for weight. 0.05 is heavy.
+      // smoothWheel: true,
+      // duration: 1.2, 
+    })
 
     // Sync ScrollTrigger with Lenis
     lenis.on('scroll', ScrollTrigger.update)
 
     // Use GSAP ticker to drive Lenis for perfect sync
+    // time is strictly monotonic in GSAP > 3.12, but we use delta
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000)
     })
 
+    // Allow a bit of lag smoothing to prevent stutter on heavy frames, but mostly eager
     gsap.ticker.lagSmoothing(0)
 
     return () => {

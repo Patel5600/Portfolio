@@ -28,7 +28,7 @@ export const Experience = () => {
                 trigger: document.body,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1.5,
+                scrub: 0.75, // Reduced from 1.5 for tighter, less laggy feel
             },
         })
 
