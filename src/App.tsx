@@ -59,7 +59,7 @@ function App() {
 
         {/* SECTION 1: HERO */}
         <section className="section section-1 intro-text">
-          <h1>Patel.dev</h1>
+          <h1>Patel<span style={{ color: '#4f46e5' }}>.dev</span></h1>
           <h3>Systems for Blockchain & Automation</h3>
           <p>
             I build automated Web3 systems, on-chain verification tools,<br />
