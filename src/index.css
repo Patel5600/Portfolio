@@ -279,3 +279,82 @@ body::after {
   color: var(--text-primary);
   text-decoration: underline;
 }
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+
+  /* Typography Scaling */
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p,
+  li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Sections: Stack and Center */
+  .section {
+    padding: 0 1.5rem;
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+  }
+
+  /* Reset specific desktop alignments to center-stack */
+  .intro-text,
+  .infra-text {
+    align-self: center;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+  }
+
+  /* Intro Section Specifics */
+  /* Move text to bottom or top? Center is safest, pushing 3D to background via Z-depth in 3D code */
+  .section-1 {
+    justify-content: flex-end;
+    /* Push text to bottom for Hero */
+    padding-bottom: 5rem;
+  }
+
+  /* Automation Section Reset */
+  .section-3 ul {
+    align-items: center !important;
+    /* Override flex-end */
+    text-align: center !important;
+  }
+
+  /* Buttons */
+  .btn {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  /* Link arrows flex fix */
+  .section-7 div {
+    flex-direction: column;
+    gap: 1.5rem !important;
+  }
+
+  /* Modal Mobile */
+  .modal {
+    padding: 1.5rem;
+    width: 95%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}

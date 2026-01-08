@@ -11,7 +11,6 @@ import { AutomationSystem } from './components/3d/AutomationSystem'
 import { FrontendSystem } from './components/3d/FrontendSystem'
 import { Projects } from './components/3d/Projects'
 import { Philosophy } from './components/3d/Philosophy'
-
 import { ContactSignal } from './components/3d/ContactSignal'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -19,6 +18,9 @@ gsap.registerPlugin(ScrollTrigger)
 export const Experience = () => {
     const cameraRef = useRef<THREE.PerspectiveCamera>(null)
     const sceneRef = useRef<THREE.Group>(null)
+
+    // Responsive Logic
+    const mobileFactor = window.innerWidth < 768
 
     useGSAP(() => {
         if (!cameraRef.current) return
@@ -28,58 +30,55 @@ export const Experience = () => {
                 trigger: document.body,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 0.75, // Reduced from 1.5 for tighter, less laggy feel
+                scrub: 0.75,
             },
         })
 
-        // Scroll total height is 700vh, so we have 6 transitions effectively.
-        // Positions matches the group positions below.
+        const zMod = mobileFactor ? 1.5 : 1
 
         // 1 -> 2: Blockchain
-        tl.to(cameraRef.current.position, { x: 0, y: -12, z: 12, duration: 1 })
+        tl.to(cameraRef.current.position, { x: 0, y: -12, z: 12 * zMod, duration: 1 })
 
         // 2 -> 3: Automation
-        tl.to(cameraRef.current.position, { x: 0, y: -24, z: 14, duration: 1 })
+        tl.to(cameraRef.current.position, { x: 0, y: -24, z: 14 * zMod, duration: 1 })
 
         // 3 -> 4: Frontend
-        tl.to(cameraRef.current.position, { x: 0, y: -36, z: 10, duration: 1 })
+        tl.to(cameraRef.current.position, { x: 0, y: -36, z: 10 * zMod, duration: 1 })
 
         // 4 -> 5: Projects
-        tl.to(cameraRef.current.position, { x: 0, y: -48, z: 12, duration: 1 })
+        tl.to(cameraRef.current.position, { x: 0, y: -48, z: 12 * zMod, duration: 1 })
 
         // 5 -> 6: Philosophy
-        tl.to(cameraRef.current.position, { x: 0, y: -60, z: 8, duration: 1 })
+        tl.to(cameraRef.current.position, { x: 0, y: -60, z: 8 * zMod, duration: 1 })
 
         // 6 -> 7: Contact (Pull back)
-        tl.to(cameraRef.current.position, { x: 0, y: -72, z: 20, duration: 1 })
+        tl.to(cameraRef.current.position, { x: 0, y: -72, z: 20 * zMod, duration: 1 })
 
-    }, { dependencies: [] })
+    }, { dependencies: [mobileFactor] })
 
     return (
         <>
-            <PerspectiveCamera makeDefault position={[0, 0, 10]} ref={cameraRef} />
+            <PerspectiveCamera makeDefault position={[0, 0, mobileFactor ? 14 : 10]} ref={cameraRef} />
 
-            {/* Functional, restrained lighting - No Shadows for high FPS */}
             <ambientLight intensity={0.1} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
             <pointLight position={[-10, -10, -10]} intensity={0.5} color="#4f46e5" />
 
-            {/* Lower resolution environment if possible, or keep default. City is fine, but maybe 'night' is lighter? stick to City for reflection. */}
             <Environment preset="city" />
 
             <group ref={sceneRef}>
                 {/* 1. Intro */}
-                <group position={[2, 0, 0]}>
+                <group position={mobileFactor ? [0, 2, 0] : [2, 0, 0]}>
                     <Intro />
                 </group>
 
                 {/* 2. Blockchain Infrastructure */}
-                <group position={[2, -12, 0]}>
+                <group position={mobileFactor ? [0, -12, 0] : [2, -12, 0]}>
                     <BlockchainCore />
                 </group>
 
                 {/* 3. Automation Systems */}
-                <group position={[-2, -24, 0]}>
+                <group position={mobileFactor ? [0, -24, 0] : [-2, -24, 0]}>
                     <AutomationSystem />
                 </group>
 
