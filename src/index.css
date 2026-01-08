@@ -1,0 +1,240 @@
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Palette */
+  --bg-deep: #050505;
+  --bg-charcoal: #0a0a0a;
+  --bg-graphite: #1a1a1a;
+  --accent-blue: #4f46e5;
+  --accent-indigo: #6366f1;
+  --text-primary: #e5e5e5;
+  --text-secondary: #a3a3a3;
+  --line-emissive: rgba(99, 102, 241, 0.5);
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-deep);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg-deep);
+}
+
+/* Canvas Container */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: all;
+  /* Allow 3D interaction */
+}
+
+/* Scroll Content Overlay */
+.scroll-content {
+  position: relative;
+  width: 100%;
+  /* We have 7 distinct visual sections. 
+     Giving enough height for comfortable scrolling. */
+  height: 700vh;
+  z-index: 10;
+  pointer-events: none;
+  /* Pass clicks to canvas, but enable for buttons */
+}
+
+/* General Section Layout */
+.section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5%;
+  pointer-events: none;
+  /* Default to pass-through */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Specific Section Positioning (Absolute for overlay mapping) */
+/* We will map these in App.tsx to their absolute top positions or just use flex logic?
+   Actually, if we use a single long container, we can just let them flow.
+   Wait, .scroll-content is 700vh, so we can just place sections at 0, 100vh, 200vh etc. 
+*/
+.section-1 {
+  top: 0;
+}
+
+.section-2 {
+  top: 100vh;
+}
+
+.section-3 {
+  top: 200vh;
+}
+
+.section-4 {
+  top: 300vh;
+}
+
+.section-5 {
+  top: 400vh;
+}
+
+.section-6 {
+  top: 500vh;
+}
+
+.section-7 {
+  top: 600vh;
+}
+
+/* Text Content Styles */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: var(--accent-indigo);
+  margin-bottom: 0.5rem;
+}
+
+p,
+li {
+  font-family: 'Inter', monospace;
+  /* Tech feel */
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+li {
+  border-left: 2px solid var(--line-emissive);
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--text-secondary);
+  background: transparent;
+  color: #fff;
+  font-family: 'Inter', monospace;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  /* Re-enable clicks */
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Modal UI */
+.ui-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: rgba(10, 10, 10, 0.95);
+  padding: 3rem;
+  border: 1px solid var(--bg-graphite);
+  color: #fff;
+  pointer-events: auto;
+  max-width: 600px;
+  width: 90%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.intro-text,
+.infra-text,
+.proj-text,
+.philo-text {
+  /* Positioning specific to visual design */
+  opacity: 1;
+  /* Managed by GSAP usually, but default 1 for visibility dev */
+}
+
+/* Right alignment for Intro as requested */
+.intro-text {
+  align-self: flex-end;
+  text-align: right;
+  padding-right: 10%;
+}
+
+/* Left alignment for Core Infra */
+.infra-text {
+  align-self: flex-start;
+  padding-left: 5%;
+}
+
+/* Center for Philosophy/Contact */
+.center-text {
+  align-self: center;
+  text-align: center;
+  align-items: center;
+}
