@@ -67,7 +67,7 @@ function App() {
           </p>
           <div style={{ pointerEvents: 'auto' }}>
             <a href="#projects" className="btn">View Projects</a>
-            <a href="https://github.com" target="_blank" className="btn">GitHub</a>
+            <a href="https://github.com/Patel5600" target="_blank" className="btn">GitHub</a>
           </div>
         </section>
 
@@ -110,28 +110,40 @@ function App() {
         <section className="section section-5 center-text" id="projects">
           <h3>Selected Work</h3>
           <h2>Projects Gallery</h2>
-          <p>Interactive 3D Objects represent distinct systems.</p>
+          <p style={{ marginBottom: '2rem' }}>Interactive 3D systems representing real blockchain and automation projects.</p>
+          <span style={{ fontSize: '0.8rem', color: '#666', border: '1px solid #333', padding: '0.5rem 1rem', borderRadius: '4px' }}>
+            Hover to inspect • Click to access system details
+          </span>
         </section>
 
         {/* SECTION 6: PHILOSOPHY */}
         <section className="section section-6 center-text">
           <h3>Philosophy</h3>
           <h2>Stability Zone</h2>
-          <p>
-            Zero-budget execution.<br />
-            Automation over manpower.<br />
-            Systems over shortcuts.<br />
-            Utility over hype.
-          </p>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li style={{ borderLeft: 'none', padding: 0, color: '#e5e5e5', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Zero-budget execution.</li>
+            <li style={{ borderLeft: 'none', padding: 0, color: '#e5e5e5', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Automation over manpower.</li>
+            <li style={{ borderLeft: 'none', padding: 0, color: '#e5e5e5', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Systems over shortcuts.</li>
+            <li style={{ borderLeft: 'none', padding: 0, color: '#e5e5e5', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Utility over hype.</li>
+          </ul>
+          <p style={{ opacity: 0.5, fontSize: '0.9rem', marginTop: '2rem' }}>Designing for reliability when resources are limited.</p>
         </section>
 
         {/* SECTION 7: CONTACT */}
         <section className="section section-7 center-text">
-          <h2>Contact</h2>
-          <div style={{ pointerEvents: 'auto', display: 'flex', gap: '2rem', justifyContent: 'center' }}>
-            <a href="https://github.com" className="btn">GitHub</a>
-            <a href="mailto:irshad@example.com" className="btn">Email</a>
+          <h3>Contact</h3>
+          <h2>END OF SYSTEM</h2>
+          <p style={{ maxWidth: '600px', margin: '0 auto 2rem auto', color: '#a3a3a3' }}>
+            If you’re building something that values reliability over noise,<br />
+            you know where to reach me.
+          </p>
+          <div style={{ pointerEvents: 'auto', display: 'flex', gap: '3rem', justifyContent: 'center' }}>
+            <a href="https://github.com/Patel5600" target="_blank" className="link-arrow">→ GitHub</a>
+            <a href="mailto:irshad@example.com" className="link-arrow">→ Email</a>
           </div>
+          <p style={{ marginTop: '4rem', fontSize: '0.75rem', opacity: 0.2 }}>
+            System Halted.
+          </p>
         </section>
 
       </main>
@@ -139,13 +151,60 @@ function App() {
       {modalContent && (
         <div className="ui-layer">
           <div className="modal">
-            <h2 style={{ marginBottom: '1rem' }}>{modalContent} System</h2>
-            <p>Detailed metrics, architectural diagrams, and live status of the {modalContent} system.</p>
-            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
-              <button onClick={() => setModalContent(null)} style={{ padding: '0.5rem 1rem', background: 'white', color: 'black', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}>
-                Close Access
-              </button>
-            </div>
+            {/* 
+               Simple lookup for modal content. 
+               In a real app this would be a separate data object, but we'll inline for simplicity. 
+            */}
+            {(() => {
+              const data = {
+                "On-Chain Document Verification": {
+                  desc: "Hash-based document verification using smart contracts to prove integrity without exposing data.",
+                  tags: ["Blockchain", "Smart Contracts", "Verification", "Web3"]
+                },
+                "Automation & Wallet Systems": {
+                  desc: "Automated workflows for testnets, faucets, and multi-wallet interactions designed to simulate real-user behavior.",
+                  tags: ["Automation", "Bots", "Web3", "Systems"]
+                },
+                "3D Frontend Systems": {
+                  desc: "Performance-focused 3D interfaces using React, Three.js, and GSAP to visualize complex systems.",
+                  tags: ["Three.js", "Frontend", "Animation", "UI Systems"]
+                }
+              }[modalContent]
+
+              // Fallback
+              const desc = data?.desc || "System details restricted."
+              const tags = data?.tags || []
+
+              return (
+                <>
+                  <h2 style={{ marginBottom: '1rem', color: '#fff' }}>{modalContent}</h2>
+                  <p style={{ color: '#a3a3a3', marginBottom: '1.5rem' }}>
+                    {desc}
+                  </p>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                    {tags.map(tag => (
+                      <span key={tag} style={{
+                        fontSize: '0.8rem',
+                        padding: '0.25rem 0.75rem',
+                        border: '1px solid #333',
+                        borderRadius: '100px',
+                        color: '#888'
+                      }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <button onClick={() => setModalContent(null)} className="btn" style={{ marginTop: 0, fontSize: '0.9rem', padding: '0.5rem 1.5rem' }}>
+                      Close System
+                    </button>
+                    <a href="https://github.com/Patel5600" target="_blank" className="btn" style={{ marginTop: 0, fontSize: '0.9rem', padding: '0.5rem 1.5rem', background: '#fff', color: '#000' }}>
+                      View Code
+                    </a>
+                  </div>
+                </>
+              )
+            })()}
           </div>
         </div>
       )}

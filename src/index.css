@@ -266,3 +266,15 @@ body::after {
   pointer-events: none;
   z-index: 1;
 }
+
+.link-arrow {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.link-arrow:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}

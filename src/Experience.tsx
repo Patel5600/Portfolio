@@ -12,6 +12,8 @@ import { FrontendSystem } from './components/3d/FrontendSystem'
 import { Projects } from './components/3d/Projects'
 import { Philosophy } from './components/3d/Philosophy'
 
+import { ContactSignal } from './components/3d/ContactSignal'
+
 gsap.registerPlugin(ScrollTrigger)
 
 export const Experience = () => {
@@ -98,14 +100,7 @@ export const Experience = () => {
 
                 {/* 7. Contact / Exit */}
                 <group position={[0, -72, 0]}>
-                    <mesh rotation={[Math.PI / 4, Math.PI / 4, 0]}>
-                        <icosahedronGeometry args={[1, 0]} />
-                        <meshStandardMaterial
-                            color="#0a0a0a"
-                            emissive="#333"
-                            wireframe
-                        />
-                    </mesh>
+                    <ContactSignal />
                 </group>
             </group>
         </>
