@@ -73,26 +73,26 @@ function App() {
 
         {/* SECTION 2: BLOCKCHAIN */}
         <section className="section section-2 infra-text">
-          <h3>Core Infrastructure</h3>
-          <h2>Blockchain & Web3</h2>
+          <h3>Blockchain & Web3 Infrastructure</h3>
+          <h2>Core Systems</h2>
           <ul>
-            <li>On-chain document hashing & verification</li>
-            <li>Smart contract interaction (ethers.js)</li>
-            <li>Multi-wallet systems & testnet automation</li>
-            <li>Transaction lifecycle tracking</li>
-            <li>Integrity-first metadata design</li>
+            <li>On-chain document hashing and verification.</li>
+            <li>Smart contract interaction using ethers.js.</li>
+            <li>Multi-wallet systems and testnet automation.</li>
+            <li>Transaction lifecycle tracking and state integrity.</li>
+            <li style={{ color: '#fff', opacity: 0.8, marginTop: '1rem', border: 'none', padding: 0 }}>Infrastructure built to fail predictably, not silently.</li>
           </ul>
         </section>
 
         {/* SECTION 3: AUTOMATION */}
         <section className="section section-3 infra-text" style={{ alignItems: 'flex-end', paddingRight: '10%' }}>
-          <h3>Automation Systems</h3>
+          <h3>AUTOMATION & BOTS</h3>
           <h2>Pipeline & Bots</h2>
           <ul style={{ textAlign: 'right', alignItems: 'flex-end', display: 'flex', flexDirection: 'column' }}>
-            <li>Selenium automation & RPA workflows</li>
-            <li>Wallet rotation & faucet logic</li>
-            <li>Testnet environment orchestration</li>
-            <li>Mechanical, deterministic execution</li>
+            <li>RPA-style workflows using JavaScript and Python.</li>
+            <li>Selenium-driven automation for real user simulation.</li>
+            <li>Wallet rotation, faucet automation, and task scheduling.</li>
+            <li style={{ color: '#fff', opacity: 0.8, marginTop: '1rem', border: 'none', padding: 0 }}>Systems optimized for consistency, scale, and control.</li>
           </ul>
         </section>
 
@@ -100,17 +100,19 @@ function App() {
         <section className="section section-4 center-text" style={{ paddingTop: '5vh' }}>
           <h3 style={{ letterSpacing: '0.2em', opacity: 0.7, fontSize: '0.9rem' }}>FRONTEND ENGINEERING</h3>
           <h2>VISUAL SYSTEMS</h2>
-          <p>
-            UI engineering. Animation orchestration.<br />
-            Performance-aware rendering. Control over chaos.
-          </p>
+          <ul style={{ listStyle: 'none', padding: 0, textAlign: 'center', lineHeight: '1.6' }}>
+            <li style={{ border: 'none', padding: 0 }}>UI engineering with React and modern JavaScript.</li>
+            <li style={{ border: 'none', padding: 0 }}>Three.js and GSAP for controlled 3D motion.</li>
+            <li style={{ border: 'none', padding: 0 }}>Animation orchestration without sacrificing performance.</li>
+            <li style={{ color: '#fff', opacity: 0.8, marginTop: '1rem', border: 'none', padding: 0 }}>Interfaces built to manage complexity, not decorate it.</li>
+          </ul>
         </section>
 
         {/* SECTION 5: PROJECTS */}
         <section className="section section-5 center-text" id="projects">
           <h3>Selected Work</h3>
           <h2>Projects Gallery</h2>
-          <p style={{ marginBottom: '2rem' }}>Interactive 3D systems representing real blockchain and automation projects.</p>
+          <p style={{ marginBottom: '2rem' }}>Interactive 3D systems representing real engineering projects.</p>
           <span style={{ fontSize: '0.8rem', color: '#666', border: '1px solid #333', padding: '0.5rem 1rem', borderRadius: '4px' }}>
             Hover to inspect • Click to access system details
           </span>
@@ -158,15 +160,15 @@ function App() {
             {(() => {
               const data = {
                 "On-Chain Document Verification": {
-                  desc: "Hash-based document verification using smart contracts to prove integrity without exposing data.",
+                  desc: "Hash-based verification system to prove document integrity without exposing data.",
                   tags: ["Blockchain", "Smart Contracts", "Verification", "Web3"]
                 },
                 "Automation & Wallet Systems": {
-                  desc: "Automated workflows for testnets, faucets, and multi-wallet interactions designed to simulate real-user behavior.",
+                  desc: "Automated pipelines for testnets, wallets, and protocol interaction.",
                   tags: ["Automation", "Bots", "Web3", "Systems"]
                 },
                 "3D Frontend Systems": {
-                  desc: "Performance-focused 3D interfaces using React, Three.js, and GSAP to visualize complex systems.",
+                  desc: "Performance-aware 3D interfaces built with React and Three.js.",
                   tags: ["Three.js", "Frontend", "Animation", "UI Systems"]
                 }
               }[modalContent]
