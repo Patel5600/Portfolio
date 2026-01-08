@@ -19,7 +19,7 @@ export const FrontendSystem = () => {
             {/* Main morphing object */}
             <TorusKnot
                 ref={meshRef}
-                args={[2, 0.6, 128, 32]}
+                args={[2, 0.6, 64, 16]}
                 onPointerOver={() => setHover(true)}
                 onPointerOut={() => setHover(false)}
             >

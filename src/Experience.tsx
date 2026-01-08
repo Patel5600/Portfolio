@@ -57,10 +57,12 @@ export const Experience = () => {
         <>
             <PerspectiveCamera makeDefault position={[0, 0, 10]} ref={cameraRef} />
 
-            {/* Functional, restrained lighting */}
+            {/* Functional, restrained lighting - No Shadows for high FPS */}
             <ambientLight intensity={0.1} />
-            <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
+            <directionalLight position={[10, 10, 5]} intensity={1} />
             <pointLight position={[-10, -10, -10]} intensity={0.5} color="#4f46e5" />
+
+            {/* Lower resolution environment if possible, or keep default. City is fine, but maybe 'night' is lighter? stick to City for reflection. */}
             <Environment preset="city" />
 
             <group ref={sceneRef}>

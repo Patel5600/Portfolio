@@ -43,7 +43,12 @@ function App() {
       <div id="canvas-container">
         <Canvas
           dpr={[1, 1.5]}
-          gl={{ antialias: true, alpha: true }}
+          gl={{
+            antialias: false,
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: true
+          }}
           camera={{ position: [0, 0, 10], fov: 45 }}
         >
           <Experience />
