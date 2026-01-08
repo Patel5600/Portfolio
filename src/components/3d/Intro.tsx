@@ -67,46 +67,58 @@ const VoxelCharacter = () => {
         currentPositions.current = originPos.map(pos => pos.clone())
     }, [originPos])
 
-    useFrame((state) => {
+    // Reusable vectors to avoid GC stutter
+    const tempVec = useMemo(() => new THREE.Vector3(), [])
+    const tempDir = useMemo(() => new THREE.Vector3(), [])
+    const tempTarget = useMemo(() => new THREE.Vector3(), [])
+
+    useFrame((state, delta) => {
         if (!meshRef.current) return
 
-        // 1. Calculate Mouse in Local Space
+        // 1. Calculate Mouse in Local Space (Allocation free)
+        // Normalize mouse to viewport dimensions
         const mouseX = (state.pointer.x * viewport.width) / 2
         const mouseY = (state.pointer.y * viewport.height) / 2
-        const mouseVec = new THREE.Vector3(mouseX, mouseY, 0)
-        meshRef.current.worldToLocal(mouseVec)
+
+        tempVec.set(mouseX, mouseY, 0)
+        meshRef.current.worldToLocal(tempVec) // tempVec is now local mouse position
 
         // 2. Update each voxel
-        originPos.forEach((origin, i) => {
+        for (let i = 0; i < originPos.length; i++) {
+            const origin = originPos[i]
             const current = currentPositions.current[i]
 
-            // Calculate Target Position for this frame
-            const target = origin.clone()
+            // Reset target to origin
+            tempTarget.copy(origin)
 
-            // Physics: Calculate Repulsion Vector from ORIGIN (stable reference)
-            const dist = origin.distanceTo(mouseVec)
-            const forceRadius = 2.5
+            // Physics: Calculate Repulsion
+            const dist = origin.distanceTo(tempVec)
+            const forceRadius = 3.0 // Increased slightly for better feel
 
             if (dist < forceRadius) {
-                const repulsionForce = 1 - (dist / forceRadius)
-                const direction = new THREE.Vector3().subVectors(origin, mouseVec).normalize()
+                // Non-linear cubic ease out for force (smoother edge)
+                const t = 1 - (dist / forceRadius)
+                const force = t * t * 3.5 // Stronger core repulsion
 
-                // Add repulsion to target
-                target.add(direction.multiplyScalar(repulsionForce * 2.0)) // Stronger push
+                // Direction from mouse to origin
+                tempDir.subVectors(origin, tempVec).normalize().multiplyScalar(force)
+                tempTarget.add(tempDir)
             }
 
-            // 3. Lerp Current -> Target (Smoothness)
-            // Factor 0.1 = smooth ease-out. Higher = snappier.
-            current.lerp(target, 0.1)
+            // 3. Smooth Lerp (Frame-rate independent dampening)
+            // 1 - Math.exp(-lambda * dt)
+            // Lambda ~ 6-8 feels good for magnetic systems.
+            const smoothFactor = 1 - Math.exp(-8 * delta)
+            current.lerp(tempTarget, smoothFactor)
 
             // 4. Update Matrix
             dummy.position.copy(current)
-            dummy.rotation.set(0, 0, 0)
-            dummy.scale.set(1, 1, 1)
+            // dummy.rotation.set(0,0,0) // No need to reset if we don't change it
+            // dummy.scale.set(1,1,1)
 
             dummy.updateMatrix()
-            meshRef.current!.setMatrixAt(i, dummy.matrix)
-        })
+            meshRef.current.setMatrixAt(i, dummy.matrix)
+        }
 
         meshRef.current.instanceMatrix.needsUpdate = true
     })
