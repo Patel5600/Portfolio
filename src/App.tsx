@@ -61,10 +61,17 @@ function App() {
         <section className="section section-1 intro-text">
           <h1>Patel<span style={{ color: '#4f46e5' }}>.dev</span></h1>
           <h3>Systems for Blockchain & Automation</h3>
-          <p>
-            I build automated Web3 systems, on-chain verification tools,<br />
-            and frontend infrastructure designed for reliability, not hype.
-          </p>
+          <div style={{ maxWidth: '600px', marginBottom: '2rem' }}>
+            <p style={{ marginBottom: '1rem' }}>
+              I build reliable systems at the intersection of blockchain, automation, and frontend engineering. My work focuses on on-chain document verification, smart contract interaction, and transaction workflows designed for predictable execution across wallets and testnets.
+            </p>
+            <p style={{ marginBottom: '1rem' }}>
+              Alongside Web3 infrastructure, I develop automation pipelines using JavaScript and Python to replace manual processes with deterministic systems. These include browser automation, task orchestration, and multi-wallet workflows.
+            </p>
+            <p>
+              On the frontend, I engineer performance-aware interfaces using React, Three.js, and GSAP. Motion and 3D are used to explain structure and flow, not to decorate. Everything is built with control, clarity, and long-term stability in mind.
+            </p>
+          </div>
           <div style={{ pointerEvents: 'auto' }}>
             <a href="#projects" className="btn">View Projects</a>
             <a href="https://github.com/Patel5600" target="_blank" className="btn">GitHub</a>

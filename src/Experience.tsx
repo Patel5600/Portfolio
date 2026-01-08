@@ -69,7 +69,7 @@ export const Experience = () => {
 
             <group ref={sceneRef}>
                 {/* 1. Intro */}
-                <group position={[0, 0, 0]}>
+                <group position={[2, 0, 0]}>
                     <Intro />
                 </group>
 
