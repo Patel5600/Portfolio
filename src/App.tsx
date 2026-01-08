@@ -97,9 +97,9 @@ function App() {
         </section>
 
         {/* SECTION 4: FRONTEND */}
-        <section className="section section-4 center-text">
-          <h3>Frontend Engineering</h3>
-          <h2>Visual Systems</h2>
+        <section className="section section-4 center-text" style={{ paddingTop: '5vh' }}>
+          <h3 style={{ letterSpacing: '0.2em', opacity: 0.7, fontSize: '0.9rem' }}>FRONTEND ENGINEERING</h3>
+          <h2>VISUAL SYSTEMS</h2>
           <p>
             UI engineering. Animation orchestration.<br />
             Performance-aware rendering. Control over chaos.

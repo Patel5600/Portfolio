@@ -1,49 +1,42 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { TorusKnot } from '@react-three/drei'
 import * as THREE from 'three'
 
 export const FrontendSystem = () => {
     const meshRef = useRef<THREE.Mesh>(null)
-    const [hovered, setHover] = useState(false)
 
-    useFrame((state) => {
+    useFrame((_, delta) => {
         if (meshRef.current) {
-            meshRef.current.rotation.x = state.clock.elapsedTime * 0.2
-            meshRef.current.rotation.y = state.clock.elapsedTime * 0.3
+            // Algorithmic, slow rotation (reduced speed)
+            meshRef.current.rotation.x += delta * 0.1
+            meshRef.current.rotation.y += delta * 0.15
+
+            // Morphing effect (Vertex-level control simulation)
+            // Keeping it subtle
+            // meshRef.current.scale.setScalar(1 + Math.sin(state.clock.elapsedTime) * 0.1)
         }
     })
 
     return (
         <group>
-            {/* Main morphing object */}
-            <TorusKnot
-                ref={meshRef}
-                args={[2, 0.6, 64, 16]}
-                onPointerOver={() => setHover(true)}
-                onPointerOut={() => setHover(false)}
-            >
+            {/* Main Complexity Object */}
+            <mesh ref={meshRef}>
                 {/* 
-                   We can simulate "morphing" by having two materials or changing wireframe prop
-                   based on scroll, but for now let's just show a controlled aesthetic 
+                   TorusKnot is good complex topology.
+                   Reduced segments [64,16] for performance, but 100,16 looks better for wireframe clarity?
+                   Let's stick to performance 64,16 but thinner tube for elegance.
                 */}
+                <torusKnotGeometry args={[1.8, 0.4, 100, 16]} />
                 <meshStandardMaterial
-                    color="#1a1a1a"
-                    wireframe={!hovered} // Interactive element: solidify on hover
-                    emissive={hovered ? "#4f46e5" : "#000"}
-                    emissiveIntensity={0.5}
+                    color="#ffffff"
+                    wireframe
+                    transparent
+                    opacity={0.15} // Reduced opacity for clarity
+                    emissive="#4f46e5"
+                    emissiveIntensity={0.2}
                 />
-            </TorusKnot>
+            </mesh>
 
-            {/* Surrounding UI elements in 3D */}
-            <mesh position={[3, 2, -1]}>
-                <planeGeometry args={[2, 3]} />
-                <meshBasicMaterial color="#4f46e5" wireframe opacity={0.3} transparent />
-            </mesh>
-            <mesh position={[-3, -2, -1]}>
-                <planeGeometry args={[2, 3]} />
-                <meshBasicMaterial color="#4f46e5" wireframe opacity={0.3} transparent />
-            </mesh>
         </group>
     )
 }
